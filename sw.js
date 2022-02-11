@@ -1,34 +1,35 @@
-this.addEventListener('install', function (event) {
+self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open('v1').then(function (cache) {
       return cache.addAll([
-        '/index.html',
-        '/index.js',
-        '/Carte.js',
-        '/favicon.ico',
-        '/bootstrap-5.1.3-dist/css/bootstrap.min.css',
-        '/icons-1.7.2/font/bootstrap-icons.css',
-        '/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js',
-        '/img/img-1.jpg',
-        '/img/img-2.jpg',
-        '/img/img-3.jpg',
-        '/img/img-4.jpg',
-        '/img/img-5.jpg',
-        '/img/img-6.jpg',
-        '/img/img-7.jpg',
-        '/img/img-8.jpg',
-        '/img/img-9.jpg',
-        '/img/icon-96x96.png',
-        '/img/icon-192x192.png',
-        '/img/icon-256x256.png',
-        '/img/icon-384x384.png',
-        '/img/icon-512x512.png'
+        'index.html',
+        'index.js',
+        'Carte.js',
+        'favicon.ico',
+        'bootstrap-5.1.3-dist/css/bootstrap.min.css',
+        'icons-1.7.2/font/bootstrap-icons.css',
+        'bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js',
+        'img/img-1.jpg',
+        'img/img-2.jpg',
+        'img/img-3.jpg',
+        'img/img-4.jpg',
+        'img/img-5.jpg',
+        'img/img-6.jpg',
+        'img/img-7.jpg',
+        'img/img-8.jpg',
+        'img/img-9.jpg',
+        'img/icon-96x96.png',
+        'img/icon-192x192.png',
+        'img/icon-256x256.png',
+        'img/icon-384x384.png',
+        'img/icon-512x512.png',
+        'page-hors-ligne.html'
       ]);
     })
   );
 });
 
-this.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', function (event) {
   console.log("Fetching ..." + event.request.url);
   event.respondWith(cacheOrNetwork(event.request).catch(() => fallbackVersPageHorsLigne()));
 });
@@ -47,5 +48,7 @@ function fromCache(request) {
 }
 
 function fallbackVersPageHorsLigne() {
-  return caches.match("/page-hors-ligne.html");
+  return caches.match("page-hors-ligne.html");
 }
+
+
