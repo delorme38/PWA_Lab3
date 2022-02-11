@@ -29,23 +29,27 @@ self.addEventListener('install', (e) => {
   );
 });
 
-self.addEventListener('fetch', function (event) {
-  event.respondWith(caches.match(event.request).then(function (response) {
-    if (response !== undefined) {
-      return response;
-    } else {
-      return fetch(event.request).then(function (response) {
-        let responseClone = response.clone();
-
-        caches.open('v1').then(function (cache) {
-          cache.put(event.request, responseClone);
-        });
-
-        return response;
-      });
-    }
-  }));
+this.addEventListener('fetch', function(event) {
+  console.log("Fetching ..." + event.request.url);
+  event.respondWith(cacheOrNetwork(event.request).catch(() => fallbackVersPageHorsLigne()));
 });
+
+
+function cacheOrNetwork(request) {
+return fromCache(request).catch(() => fetch(request));
+};
+
+function fromCache(request) {
+return caches.open('v1').then(function (cache) {
+  return cache.match(request).then(function (matching) {
+    return matching || Promise.reject('no-match');
+  });
+});
+}
+
+function fallbackVersPageHorsLigne() {
+return caches.match("/page-hors-ligne.html");
+}
 
 self.addEventListener('activate', (e) => {
   console.log('active');
