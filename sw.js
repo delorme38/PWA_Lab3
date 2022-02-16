@@ -62,11 +62,11 @@ this.addEventListener('sync', function (event) {
 function envoyerNotification() {
   if (Notification.permission === 'granted') {
       var options = {
-          body: 'Ma première notification push',
+          body: 'Veuillez raffraichir la page ou clicker sur Reessayer',
           requireInteraction: true
       };
 
-      self.registration.showNotification('Hello', options);
+      self.registration.showNotification('Connexion est retabli', options);
   } else {
       console.log("aucune notification car non permis");
   }
