@@ -30,7 +30,6 @@ self.addEventListener('install', function (event) {
 });
 
 self.addEventListener('fetch', function (event) {
-  console.log("Fetching ..." + event.request.url);
   event.respondWith(cacheOrNetwork(event.request).catch(() => fallbackVersPageHorsLigne()));
 });
 
