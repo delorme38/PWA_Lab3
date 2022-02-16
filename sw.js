@@ -60,6 +60,7 @@ this.addEventListener('sync', function (event) {
   console.log("evenement recu : " + event);
   if (event.tag == 'notifier-reseau') {
       console.log("le reseau est de retour!!");
+      event.waitUntil(envoyerNotification());
   }
 });
 
