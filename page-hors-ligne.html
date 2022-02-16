@@ -8,9 +8,8 @@
 </head>
 <body>
     <p> Désolé cette ressource n'est pas disponible hors-ligne</p>
-    <button onclick="meNotifier()">Activer les notifications</button>
-    <button onclick="enregistrerTagBgSync()">Envoyer une notification</button>
-    <button onclick="subscribeUser()">S'abonner aux notifications push</button>
+    <!-- <button onclick="meNotifier()">Activer les notifications</button> -->
+    <button onclick="enregistrerTagBgSync()">Me notifier quand la connexion reviens</button>
 
     <script>// Web-Push
         // Public base64 to Uint
@@ -53,6 +52,10 @@
         }
         
         function enregistrerTagBgSync() {
+            Notification.requestPermission().then(function (result) {
+              console.log("permission donnée");
+              console.log(result);
+          });
           if ('serviceWorker' in navigator && 'SyncManager' in window) {
               navigator.serviceWorker.ready.then(function (reg) {
                   return reg.sync.register('notifier-reseau');
