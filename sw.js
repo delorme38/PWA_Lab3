@@ -51,11 +51,6 @@ function fallbackVersPageHorsLigne() {
   return caches.match("page-hors-ligne.html");
 }
 
-// self.addEventListener('push', function (e) {
-//   console.log('push 2 recu: ');
-//   envoyerNotification();
-// })
-
 this.addEventListener('sync', function (event) {
   console.log("evenement recu : " + event);
   if (event.tag == 'notifier-reseau') {
