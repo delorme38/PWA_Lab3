@@ -62,3 +62,16 @@ this.addEventListener('sync', function (event) {
       console.log("le reseau est de retour!!");
   }
 });
+
+function envoyerNotification() {
+  if (Notification.permission === 'granted') {
+      var options = {
+          body: 'Ma première notification push',
+          requireInteraction: true
+      };
+
+      self.registration.showNotification('Hello', options);
+  } else {
+      console.log("aucune notification car non permis");
+  }
+}
