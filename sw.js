@@ -36,7 +36,7 @@ self.addEventListener('fetch', function (event) {
 
 function cacheOrNetwork(request) {
   return fromCache(request).catch(() => fetch(request));
-};
+}
 
 function fromCache(request) {
   return caches.open('v1').then(function (cache) {
